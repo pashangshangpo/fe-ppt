@@ -1,0 +1,7 @@
+*.min.*
+
+/build
+/config
+/node_modules
+/static
+/index.html
