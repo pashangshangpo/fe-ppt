@@ -1,59 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SwiperCore, {
-	A11y,
-	Autoplay,
-	Controller,
-	EffectCoverflow,
-	EffectCube,
-	EffectFade,
-	EffectFlip,
-	HashNavigation,
-	History,
-	Keyboard,
-	Lazy,
-	Mousewheel,
-	Navigation,
-	Pagination,
-	Parallax,
-	Scrollbar,
-	Thumbs,
-	Virtual,
-	Zoom
-} from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { Row, Col } from 'antd'
 import JsxParser from 'react-jsx-parser'
+import Swiper from '$components/Swiper'
+import { SwiperSlide } from 'swiper/react'
 import ViewShow from '$components/ViewShow'
 import { getPPT } from '$api'
 import marked from 'marked'
 
-import 'swiper/swiper-bundle.min.css'
 import 'animate.css/animate.min.css'
 import 'antd/dist/antd.css'
-import './style/index.css'
-
-SwiperCore.use([
-	A11y,
-	Autoplay,
-	Controller,
-	EffectCoverflow,
-	EffectCube,
-	EffectFade,
-	EffectFlip,
-	HashNavigation,
-	History,
-	Keyboard,
-	Lazy,
-	Mousewheel,
-	Navigation,
-	Pagination,
-	Parallax,
-	Scrollbar,
-	Thumbs,
-	Virtual,
-	Zoom
-])
+import './style/index.scss'
 
 marked.setOptions({
 	xhtml: true
@@ -74,14 +31,7 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 	code = marked(code)
 
 	const main = `
-	<Swiper
-	pagination={{
-		dynamicBullets: true
-	}}
-	keyboard={{
-		enabled: true
-	}}
->
+<Swiper>
 	<SwiperSlide><ViewShow>
 	${code}
 	</ViewShow></SwiperSlide>
@@ -99,5 +49,8 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 		}
 	}
 
-	ReactDOM.render(<Main />, document.body.appendChild(document.createElement('div')));
+	const dom = document.createElement('div')
+	dom.id = 'app'
+
+	ReactDOM.render(<Main />, document.body.appendChild(dom));
 })
