@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import JsxParser from 'react-jsx-parser'
 import { getPPT } from '$api'
-import marked from 'marked'
+import marked from '$common/marked'
 import WebSlides from '$common/webSlides'
 
 import './style/index.scss'
@@ -18,6 +18,22 @@ marked.use({
 		},
 		hr: () => {
 			return `</section><section>`
+		},
+		warp: text => {
+			if (!text) {
+				return '</div>'
+			}
+
+			const list = text.split(' ')
+			const classNames = []
+
+			list.forEach(li => {
+				if (li.indexOf('.') === 0) {
+					classNames.push(li.slice(1))
+				}
+			})
+
+			return `<div className="${classNames.join(' ')}">`
 		}
 	}
 })
