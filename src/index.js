@@ -89,19 +89,19 @@ if (!url) {
   })
 } else {
   getPPT(location.href.split('?ppt=')[1]).then(code => {
-		const configMatch = code.match(/^-{3,} *\n+([\w\W]+?)\n+-{3,}/)
+    const configMatch = code.match(/^-{3,} *\n+([\w\W]+?)\n+-{3,}/)
 
-		if (configMatch) {
-			code = code.substring(configMatch[0])
+    if (configMatch) {
+      code = code.substring(configMatch[0])
 
-			configMatch[1].split('\n').forEach(config => {
-				const [ name, value ] = config.split(':')
+      configMatch[1].split('\n').forEach(config => {
+        const [name, value] = config.split(':')
 
-				if (name === 'title') {
-					document.title = value.trim()
-				}
-			})
-		}
+        if (name === 'title') {
+          document.title = value.trim()
+        }
+      })
+    }
 
     code = marked(code)
 
