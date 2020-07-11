@@ -12,47 +12,49 @@ marked.setOptions({
 	xhtml: true
 })
 
+const warpTagNameList = []
+
 marked.use({
 	renderer: {
 		heading: (text, level) => {
 			return `<h${level}>${text}</h${level}>\n`
 		},
-		hr: () => {
-			return `</section><section>`
-		},
 		warp: text => {
 			if (!text) {
-				return '</div>'
+				const tagName = warpTagNameList.pop()
+
+				return `</${tagName}>\n`
 			}
 
 			const list = text.split(' ')
 			const classNames = []
+			let isPage = false
 
 			list.forEach(li => {
-				if (li.indexOf('.') === 0) {
+				if (li === 'page') {
+					isPage = true
+				} else if (li.indexOf('.') === 0) {
 					if (li.indexOf('.animate__') === 0) {
 						classNames.push('animate__animated')
 					}
-					
+
 					classNames.push(li.slice(1))
 				}
 			})
 
-			return `<div className="${classNames.join(' ')}">`
+			const tagName = isPage ? 'section' : 'div'
+
+			warpTagNameList.push(tagName)
+
+			const names = classNames.join(' ')
+
+			return `<${tagName}${names ? ` className="${names}"` : ''}>\n`
 		}
 	}
 })
 
 getPPT(location.href.split('?ppt=')[1]).then(code => {
 	code = marked(code)
-
-	const main = `
-	<div id="webslides">
-	<section className="aligncenter">
-	${code}
-	</section>
-	</div>
-	`
 
 	class Main extends React.Component {
 		componentDidMount() {
@@ -62,7 +64,7 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 		render() {
 			return (
 				<JsxParser
-					jsx={main}
+					jsx={`<div id="webslides">${code}</div>`}
 				/>
 			)
 		}
