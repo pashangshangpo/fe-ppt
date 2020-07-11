@@ -22,12 +22,15 @@ import SwiperCore, {
 	Zoom
 } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Row, Col } from 'antd'
 import JsxParser from 'react-jsx-parser'
 import ViewShow from '$components/ViewShow'
 import { getPPT } from '$api'
+import marked from 'marked'
 
 import 'swiper/swiper-bundle.min.css'
 import 'animate.css/animate.min.css'
+import 'antd/dist/antd.css'
 import './style/index.css'
 
 SwiperCore.use([
@@ -52,30 +55,23 @@ SwiperCore.use([
 	Zoom
 ])
 
-getPPT(location.href.split('?ppt=')[1]).then(code => {
-	const lines = code.trim().split('\n')
-	let sections = []
-	let section = ''
+marked.setOptions({
+	xhtml: true
+})
 
-	for (let line of lines) {
-		if (line.trim() === '---') {
-			sections.push(section)
-			section = ''
-			continue
+marked.use({
+	renderer: {
+		heading: (text, level) => {
+			return `<h${level}>${text}</h${level}>\n`
+		},
+		hr: () => {
+			return `</ViewShow></SwiperSlide><SwiperSlide><ViewShow>`
 		}
-
-		section += line
 	}
+})
 
-	sections.push(section)
-
-	sections = sections.map(section => (`
-		<SwiperSlide>
-				<ViewShow>
-					${section}
-				</ViewShow>
-		</SwiperSlide>
-	`)).join('\n')
+getPPT(location.href.split('?ppt=')[1]).then(code => {
+	code = marked(code)
 
 	const main = `
 	<Swiper
@@ -86,7 +82,9 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 		enabled: true
 	}}
 >
-	${sections}
+	<SwiperSlide><ViewShow>
+	${code}
+	</ViewShow></SwiperSlide>
 </Swiper>
 	`
 
@@ -94,7 +92,7 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 		render() {
 			return (
 				<JsxParser
-					components={{ Swiper, SwiperSlide, ViewShow }}
+					components={{ Swiper, SwiperSlide, Row, Col, ViewShow }}
 					jsx={main}
 				/>
 			)
