@@ -83,25 +83,35 @@ marked.use({
 	}
 })
 
-getPPT(location.href.split('?ppt=')[1]).then(code => {
-	code = marked(code)
+const url = location.href.split('?ppt=')[1]
 
-	class Main extends React.Component {
-		componentDidMount() {
-			new WebSlides()
+if (!url) {
+	location.href = `/#slide=1/?ppt=`
+
+	setTimeout(() => {
+		document.write('请输入网址后面输入ppt地址')
+	})
+} else {
+	getPPT(location.href.split('?ppt=')[1]).then(code => {
+		code = marked(code)
+	
+		class Main extends React.Component {
+			componentDidMount() {
+				new WebSlides()
+			}
+	
+			render() {
+				return (
+					<JsxParser
+						jsx={`<div id="webslides">${code}</div>`}
+					/>
+				)
+			}
 		}
-
-		render() {
-			return (
-				<JsxParser
-					jsx={`<div id="webslides">${code}</div>`}
-				/>
-			)
-		}
-	}
-
-	const dom = document.createElement('div')
-	dom.id = 'app'
-
-	ReactDOM.render(<Main />, document.body.appendChild(dom));
-})
+	
+		const dom = document.createElement('div')
+		dom.id = 'app'
+	
+		ReactDOM.render(<Main />, document.body.appendChild(dom));
+	})
+}
