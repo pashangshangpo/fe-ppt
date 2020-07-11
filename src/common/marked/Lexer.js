@@ -118,6 +118,14 @@ module.exports = class Lexer {
       // warp
       if (token = this.tokenizer.warp(src)) {
         src = src.substring(token.raw.length);
+
+        if (token.text === 'style') {
+          const index = src.indexOf(':::')
+
+          token.value = src.substring(0, index)
+          src = src.substring(index + 1)
+        }
+
         tokens.push(token);
         continue;
       }

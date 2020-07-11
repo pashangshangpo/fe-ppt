@@ -54,6 +54,12 @@ module.exports = class Parser {
     const l = tokens.length;
     for (i = 0; i < l; i++) {
       token = tokens[i];
+      const forEachOut = this.renderer.forEach && this.renderer.forEach(token)
+
+      if (forEachOut) {
+        out += forEachOut
+      }
+
       switch (token.type) {
         case 'space': {
           continue;
@@ -172,7 +178,7 @@ module.exports = class Parser {
           continue;
         }
         case 'warp': {
-          out += this.renderer.warp(token.text);
+          out += this.renderer.warp(token);
           continue;
         }
         default: {
