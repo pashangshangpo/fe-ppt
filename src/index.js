@@ -5,6 +5,7 @@ import { getPPT } from '$api'
 import marked from '$common/marked'
 import WebSlides from '$common/webSlides'
 
+import 'animate.css/animate.min.css'
 import './style/index.scss'
 
 marked.setOptions({
@@ -29,6 +30,10 @@ marked.use({
 
 			list.forEach(li => {
 				if (li.indexOf('.') === 0) {
+					if (li.indexOf('.animate__') === 0) {
+						classNames.push('animate__animated')
+					}
+					
 					classNames.push(li.slice(1))
 				}
 			})
