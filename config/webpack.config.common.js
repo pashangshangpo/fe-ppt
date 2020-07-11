@@ -35,17 +35,17 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
         use: [
           'babel-loader'
         ]
       },
       {
-        test: /\.(png|jpg|gif)/,
+        test: /\.(png|jpg|gif|svg)/,
         include: [
           resolve('src')
         ],
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
         use: [
           {
             loader: 'url-loader',
@@ -56,14 +56,14 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.svg/,
-        include: [
-          resolve('src')
-        ],
-        exclude: /(node_modules|bower_components)/,
-        use: ['svg-sprite-loader']
-      }
+      // {
+      //   test: /\.svg/,
+      //   include: [
+      //     resolve('src')
+      //   ],
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: ['svg-sprite-loader']
+      // }
     ]
   },
   plugins: [

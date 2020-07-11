@@ -1,15 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Row, Col } from 'antd'
 import JsxParser from 'react-jsx-parser'
-import Swiper from '$components/Swiper'
-import { SwiperSlide } from 'swiper/react'
-import ViewShow from '$components/ViewShow'
 import { getPPT } from '$api'
 import marked from 'marked'
+import WebSlides from '$common/webSlides'
 
-import 'animate.css/animate.min.css'
-import 'antd/dist/antd.css'
 import './style/index.scss'
 
 marked.setOptions({
@@ -22,7 +17,7 @@ marked.use({
 			return `<h${level}>${text}</h${level}>\n`
 		},
 		hr: () => {
-			return `</ViewShow></SwiperSlide><SwiperSlide><ViewShow>`
+			return `</section><section>`
 		}
 	}
 })
@@ -31,18 +26,21 @@ getPPT(location.href.split('?ppt=')[1]).then(code => {
 	code = marked(code)
 
 	const main = `
-<Swiper>
-	<SwiperSlide><ViewShow>
+	<div id="webslides">
+	<section className="aligncenter">
 	${code}
-	</ViewShow></SwiperSlide>
-</Swiper>
+	</section>
+	</div>
 	`
 
 	class Main extends React.Component {
+		componentDidMount() {
+			new WebSlides()
+		}
+
 		render() {
 			return (
 				<JsxParser
-					components={{ Swiper, SwiperSlide, Row, Col, ViewShow }}
 					jsx={main}
 				/>
 			)

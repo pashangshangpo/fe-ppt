@@ -56,6 +56,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-jsx-parser": "^1.25.1",
-    "swiper": "^6.0.1"
+    "swiper": "^6.0.1",
+    "webslides": "^1.5.0"
   }
 }
