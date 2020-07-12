@@ -60,6 +60,8 @@ module.exports = class Parser {
         out += forEachOut
       }
 
+      this.renderer.token = token
+
       switch (token.type) {
         case 'space': {
           continue;
@@ -208,6 +210,8 @@ module.exports = class Parser {
     const l = tokens.length;
     for (i = 0; i < l; i++) {
       token = tokens[i];
+      renderer.token = token
+
       switch (token.type) {
         case 'escape': {
           out += renderer.text(token.text);
