@@ -129,7 +129,9 @@ export default md => {
     const className = classNames.join(' ')
     const customAttr = customAttrs.join(' ')
 
-    return `${id ? `id="${id}"` : ''}${className ? ` className="${className}"` : ''}${customAttr ? ` ${customAttr}` : ''}`.trim()
+    return `${id ? `id="${id}"` : ''}${
+      className ? ` className="${className}"` : ''
+    }${customAttr ? ` ${customAttr}` : ''}`.trim()
   }
 
   forToken(tokens, token => {

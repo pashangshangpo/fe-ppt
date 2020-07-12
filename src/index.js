@@ -11,34 +11,34 @@ import './style/index.scss'
 const url = location.href.split('?ppt=')[1]
 const md = window.MD
 const render = md => {
-	md = markdown(md)
+  md = markdown(md)
 
-	class Main extends React.Component {
-		componentDidMount() {
-			new WebSlides()
-		}
+  class Main extends React.Component {
+    componentDidMount() {
+      new WebSlides()
+    }
 
-		render() {
-			return <JsxParser jsx={`<div id="webslides">${md}</div>`} />
-		}
-	}
+    render() {
+      return <JsxParser jsx={`<div id="webslides">${md}</div>`} />
+    }
+  }
 
-	const dom = document.createElement('div')
-	dom.id = 'app'
+  const dom = document.createElement('div')
+  dom.id = 'app'
 
-	ReactDOM.render(<Main />, document.body.appendChild(dom))
+  ReactDOM.render(<Main />, document.body.appendChild(dom))
 }
 
 if (md) {
-	render(md)
+  render(md)
 } else if (!url) {
-	location.href = `/#slide=1/?ppt=`
+  location.href = `/#slide=1/?ppt=`
 
-	setTimeout(() => {
-		document.write('请输入网址后面输入ppt地址')
-	})
+  setTimeout(() => {
+    document.write('请输入网址后面输入ppt地址')
+  })
 } else {
-	getPPT(url).then(md => {
-		render(md)
-	})
+  getPPT(url).then(md => {
+    render(md)
+  })
 }
