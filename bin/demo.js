@@ -5,7 +5,7 @@ const app = new Koa()
 
 module.exports = indexPage => {
   app.use(async (cxt, next) => {
-    if (cxt.url === '/') {
+    if (cxt.url === '/' && indexPage) {
       cxt.body = indexPage
 
       return
