@@ -7,9 +7,33 @@ marked.setOptions({
 export default md => {
   const warpTagNameList = []
   let pageIndex = 1
+  const addAttr = (tag, attr, text) => {
+    return `<${tag} ${attr}>${text}</${tag}>\n`
+  }
 
   marked.use({
     renderer: {
+      blockquote(text) {
+        return addAttr('blockquote', this.token.attrs, text)
+      },
+      em(text) {
+        return addAttr('em', this.token.attrs, text)
+      },
+      codespan(text) {
+        return addAttr('code', this.token.attrs, text)
+      },
+      del(text) {
+        return addAttr('del', this.token.attrs, text)
+      },
+      paragraph(text) {
+        return addAttr('p', this.token.attrs, text)
+      },
+      strong(text) {
+        return addAttr('strong', this.token.attrs, text)
+      },
+      listitem(text) {
+        return addAttr('li', this.token.attrs, text)
+      },
       heading(text, level) {
         return `<h${level} ${this.token.attrs}>${text}</h${level}>\n`
       },
@@ -135,13 +159,13 @@ export default md => {
   }
 
   forToken(tokens, token => {
+    token.attrs = ''
+
     if (token.type === 'html' || !token.text) {
       return
     }
 
-    token.attrs = ''
-
-    const m = token.text.match(/^(.+)\s+\::(.+)\::$/)
+    const m = token.text.match(/^(.*)\s*\::(.+)\::/)
 
     if (!m) {
       return
