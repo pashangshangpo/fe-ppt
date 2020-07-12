@@ -8,8 +8,7 @@ Promise.resolve().then(async () => {
   const Path = require('path')
   const Demo = require('./demo')
 
-  Cli
-    .version('0.0.1')
+  Cli.version('0.0.1')
     .description('i-ppt')
     .option('-t, --type [type]', '执行的命令类型，示例：demo,export')
     .option('-path, --path [type]', '文件路径，绝对路径')
@@ -30,7 +29,7 @@ Promise.resolve().then(async () => {
     let html = Fs.readFileSync(htmlPath).toString()
 
     html = html.replace('window.MD', `window.MD = \`${md}\``)
-  
+
     if (Type === 'demo') {
       Demo(html)
       return
@@ -42,7 +41,10 @@ Promise.resolve().then(async () => {
 
     Fs.writeFileSync(Path.join(demoOutPath, 'index.html'), html)
 
-    Compressing.zip.compressDir(demoOutPath, Path.resolve('.', 'i-ppt-demo.zip'))
+    Compressing.zip.compressDir(
+      demoOutPath,
+      Path.resolve('.', 'i-ppt-demo.zip')
+    )
 
     return
   }

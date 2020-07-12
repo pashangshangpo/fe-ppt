@@ -7,7 +7,7 @@ module.exports = indexPage => {
   app.use(async (cxt, next) => {
     if (cxt.url === '/') {
       cxt.body = indexPage
-      
+
       return
     }
 
