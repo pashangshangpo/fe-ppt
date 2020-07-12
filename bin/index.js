@@ -9,7 +9,7 @@ Promise.resolve().then(async () => {
   const Demo = require('./demo')
 
   Cli.version('0.0.1')
-    .description('i-ppt')
+    .description('fe-ppt')
     .option('-t, --type [type]', '执行的命令类型，示例：demo,export')
     .option('-path, --path [type]', '文件路径，绝对路径')
     .parse(process.argv)
@@ -35,7 +35,7 @@ Promise.resolve().then(async () => {
       return
     }
 
-    const demoOutPath = Path.join(distPath, '../i-ppt-demo')
+    const demoOutPath = Path.join(distPath, '../fe-ppt-demo')
 
     CopyDir.sync(distPath, demoOutPath)
 
@@ -43,7 +43,7 @@ Promise.resolve().then(async () => {
 
     Compressing.zip.compressDir(
       demoOutPath,
-      Path.resolve('.', 'i-ppt-demo.zip')
+      Path.resolve('.', 'fe-ppt-demo.zip')
     )
 
     return

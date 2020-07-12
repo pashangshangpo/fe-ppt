@@ -1,12 +1,12 @@
 {
-  "name": "i-ppt",
+  "name": "fe-ppt",
   "version": "1.0.0",
   "bin": {
-    "i-ppt": "./bin/index.js"
+    "fe-ppt": "./bin/index.js"
   },
   "files": [
     "bin/",
-    "dist/",
+    "dist/"
   ],
   "license": "MIT",
   "scripts": {

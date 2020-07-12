@@ -1,11 +1,11 @@
-# I PPT
+# FE PPT
 
 不会PPT，Markdown + CSS 还不会吗？
 
 ## 入门
 
-1. npx i-ppt
-2. i-ppt --path hello.md
+1. npx fe-ppt
+2. fe-ppt --path hello.md
 
 ## 使用指南
 
@@ -14,13 +14,13 @@
 1. 本地md文件
 
 ```
-i-ppt --path hello.md
+fe-ppt --path hello.md
 ```
 
 2. 远程md文件
 
 ```
-i-ppt
+fe-ppt
 ```
 
 启动服务后，在网址后面的url上面添加?ppt=http://127.0.0.1/hello.md
@@ -28,7 +28,7 @@ i-ppt
 ### 导出PPT
 
 ```
-i-ppt --path hello.md --type export
+fe-ppt --path hello.md --type export
 ```
 
 ## PPT语法
