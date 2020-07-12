@@ -5,7 +5,8 @@
     "i-ppt": "./bin/index.js"
   },
   "files": [
-    "bin/"
+    "bin/",
+    "dist/",
   ],
   "license": "MIT",
   "scripts": {
