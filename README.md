@@ -77,12 +77,51 @@ body {
 
 ```
 
-### ::: .xx .xxx
+### ::: 给包装元素添加样式
 
 - 以.开头的为 class，会被包装到一个 div 元素的 class 上面。
 - 可以通过`::: style`定义全局样式，然后通过.xx 的方式添加到元素上。
 - 也可以使用内置的自带样式，提供了布局，动画等样式。
 - 支持 animate.css 中的所有动画功能。
+
+```
+::: page .class1 .class2
+
+# 我是个大标题
+
+::: .build
+
+- CSS
+- HTML
+- Javascript
+
+:::
+
+:::
+```
+
+注意，如果要使用:::功能，则:::必须放在 page 下面，不能与 page 同级，另外::: page 本身也支持添加 class
+
+### :: 单元素添加属性
+
+支持以下元素使用自定义属性功能，id 使用#开头，class 使用.开头，剩余为自定义属性，会被添加到标签属性上
+
+- blockquote
+- em
+- code
+- del
+- p
+- strong
+- li
+- h1-h6
+
+```
+# 我是标题啊 ::.class1 #app data-id=1::
+
+output
+
+<h1 id="app" class="class1" data-id="1">我是标题啊</h1>
+```
 
 ### 列表按照顺序显示
 
