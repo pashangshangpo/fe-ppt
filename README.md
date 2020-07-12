@@ -4,7 +4,7 @@
 
 ## 入门
 
-1. npm -g fe-ppt
+1. npm i -g fe-ppt
 2. fe-ppt --path hello.md
 
 ## 使用指南
