@@ -102,10 +102,25 @@ export default md => {
     md = md.substring(configMatch[0].length)
 
     configMatch[1].split('\n').forEach(config => {
-      const [name, value] = config.split(':')
+      const [, name, value] = config.match(/^(.+?): *(.+)$/) || []
 
       if (name === 'title') {
         document.title = value.trim()
+      }
+
+      if (name === 'style') {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = value
+
+        document.body.appendChild(link)
+      }
+
+      if (name === 'script') {
+        const script = document.createElement('script')
+        script.src = value
+
+        document.body.appendChild(script)
       }
     })
   }
