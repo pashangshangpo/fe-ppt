@@ -189,7 +189,7 @@ export default md => {
     token.text = m[1]
 
     if (m[2]) {
-      token.attrs = parseAttrs(m[2])
+      token.attrs = parseAttrs(m[2].trim())
     }
   })
 
