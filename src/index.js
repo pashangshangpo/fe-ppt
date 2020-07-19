@@ -16,7 +16,7 @@ const render = md => {
   class Main extends React.Component {
     componentDidMount() {
       new WebSlides()
-     
+
       require('less')
     }
 
