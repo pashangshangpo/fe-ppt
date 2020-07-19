@@ -29,7 +29,7 @@ export default class Keyboard {
         document.addEventListener('control:keydown', this.onKeyPress_.bind(this), false);
     }
     init_() {
-        const toBuildNode = toArray(this.ws_.el.querySelectorAll('.build > * > li'));
+        const toBuildNode = toArray(this.ws_.el.querySelectorAll('.build > * > li,.build + p'));
         if (toBuildNode.length) {
             toBuildNode.forEach(node => {
                 node.classList.add('tobuild');
