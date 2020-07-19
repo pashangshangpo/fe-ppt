@@ -176,13 +176,13 @@ export default (md, rules) => {
       return
     }
 
-    const m = token.text.match(/^(.*)\s*\::(.+)\::/)
+    const m = (token.lang || token.text).match(/^(.*)\s*\::(.+)\::/)
 
     if (!m) {
       return
     }
 
-    token.text = m[1]
+    token.text = token.lang ? token.text : m[1]
 
     if (m[2]) {
       token.attrs = parseAttrs(m[2].trim())

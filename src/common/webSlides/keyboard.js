@@ -35,7 +35,7 @@ export default class Keyboard {
   init_() {
     const toBuildNode = toArray(
       this.ws_.el.querySelectorAll(
-        '.build > * > li,.build + p,.build + * > li,.build > p'
+        '.build > * > li,.build + p,.build + * > li,.build > p,.build > ul + pre'
       )
     )
     if (toBuildNode.length) {

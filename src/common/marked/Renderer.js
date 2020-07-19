@@ -23,12 +23,12 @@ module.exports = class Renderer {
     }
 
     if (!lang) {
-      return '<pre><code>'
+      return `<pre ${this.token.attrs}><code>`
         + (escaped ? code : escape(code, true))
         + '</code></pre>\n';
     }
 
-    return '<pre><code class="'
+    return `<pre ${this.token.attrs}><code class="`
       + this.options.langPrefix
       + escape(lang, true)
       + '">'
