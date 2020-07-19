@@ -1,6 +1,6 @@
 // sass-lint:disable no-vendor-prefixes
 
-/*=========================================
+/* =========================================
 1. Base --> Baseline: 8px = .8rem
 =========================================== */
 
@@ -10,9 +10,9 @@ webslides.js will add .ws-ready automatically. Don't worry :) -- */
 .ws-ready {
   &,
   body {
-    height: 100%;
     overflow: hidden;
     width: 100%;
+    height: 100%;
   }
 
   &.ws-ready-zoom {
@@ -25,11 +25,9 @@ webslides.js will add .ws-ready automatically. Don't worry :) -- */
 }
 
 #webslides {
-  -ms-overflow-style: none;
+  height: 100%;
   -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-misspelled-properties
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -48,7 +46,7 @@ input:focus,
 textarea:focus,
 button {
   text-decoration: none;
-  transition: all .3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 p a:active {
@@ -58,48 +56,48 @@ p a:active {
 
 nav a[rel='external'] em,
 .hidden {
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  overflow: hidden;
   position: absolute;
+  overflow: hidden;
   width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
 }
 
 .shadow {
   position: relative;
 
-  &:before,
-  &:after {
-    bottom: 1.6rem;
-    content: '';
-    max-width: 300px;
+  &::before,
+  &::after {
     position: absolute;
-    top: 80%;
-    width: 50%;
     z-index: -1;
+    top: 80%;
+    bottom: 1.6rem;
+    width: 50%;
+    max-width: 300px;
+    content: '';
   }
 
-  &:after {
+  &::after {
     right: 2.4rem;
     transform: rotate(3deg);
   }
 
-  &:before {
+  &::before {
     left: 2.4rem;
     transform: rotate(-3deg);
   }
 }
 
-/*=== 1.1 WRAP/CONTAINER === */
+/* === 1.1 WRAP/CONTAINER === */
 .wrap,
 header nav,
 footer nav {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 100%;
   position: relative;
-  width: 100%;
   z-index: 2;
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 
   @media (min-width: 1024px) {
     width: 90%;
@@ -112,7 +110,7 @@ footer nav {
 }
 
 .radius {
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 }
 
 .alignright {
@@ -124,16 +122,16 @@ footer nav {
 }
 
 .aligncenter {
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
   text-align: center;
 }
 
 img.aligncenter,
 figure.aligncenter {
   display: block;
-  margin-bottom: .8rem;
-  margin-top: .8rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
 }
 
 img.alignleft,
@@ -142,25 +140,25 @@ img.alignright,
 figure.alignright,
 img.aligncenter,
 figure.aligncenter {
-  margin-bottom: 3.2rem;
   margin-top: 3.2rem;
+  margin-bottom: 3.2rem;
 }
 
 img.alignright,
 svg.alignright,
 figure.alignright {
-  margin: .8rem 0 .8rem 2.4rem;
+  margin: 0.8rem 0 0.8rem 2.4rem;
 }
 
 img.alignleft,
 svg.alignleft,
 figure.alignleft {
-  margin: .8rem 2.4rem .8rem 0;
+  margin: 0.8rem 2.4rem 0.8rem 0;
 }
 
 $sizes: 80, 70, 60, 50, 40, 30, 20;
 
-/*=== div.size-60, img.size-50, h1.size-40, p.size-30... === */
+/* === div.size-60, img.size-50, h1.size-40, p.size-30... === */
 @media (min-width: 1024px) {
   @each $size in $sizes {
     .size-#{$size} {
@@ -175,13 +173,13 @@ code {
 }
 
 pre {
+  overflow: auto;
+  width: 100%;
+  padding: 2.4rem;
   font-size: 1.6rem;
   line-height: 2.4rem;
-  overflow: auto;
-  padding: 2.4rem;
   text-align: left;
   white-space: pre-wrap;
-  width: 100%;
   word-wrap: break-word;
 
   & + p {
@@ -194,5 +192,5 @@ pre {
 }
 
 code {
-  padding: .4rem;
+  padding: 0.4rem;
 }
