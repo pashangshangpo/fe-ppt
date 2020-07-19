@@ -22,10 +22,12 @@ const render = md => {
     }
 
     render() {
-      return <JsxParser
-        components={{ Image }}
-        jsx={`<div id="webslides">${md}</div>`}
-      />
+      return (
+        <JsxParser
+          components={{ Image }}
+          jsx={`<div id="webslides">${md}</div>`}
+        />
+      )
     }
   }
 

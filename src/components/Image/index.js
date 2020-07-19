@@ -6,11 +6,6 @@ export default class extends React.Component {
   }
 
   render() {
-    return (
-      <img
-        src={this.props.src}
-        onDoubleClick={this.handleClick}
-      />
-    )
+    return <img src={this.props.src} onDoubleClick={this.handleClick} />
   }
 }
