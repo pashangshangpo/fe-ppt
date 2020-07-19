@@ -4,7 +4,7 @@ marked.setOptions({
   xhtml: true,
 })
 
-export default md => {
+export default (md, rules) => {
   const warpTagNameList = []
   let pageIndex = 1
   const addAttr = (tag, attr, text) => {
@@ -99,35 +99,27 @@ export default md => {
     },
   })
 
-  const configMatch = md.match(/^-{3,} *\n+([\w\W]+?)\n+-{3,}/)
+  rules.forEach(({ name, value }) => {
+    if (name === 'title') {
+      document.title = value.trim()
+    }
 
-  if (configMatch) {
-    md = md.substring(configMatch[0].length)
+    if (name === 'style') {
+      const link = document.createElement('link')
+      link.type = 'text/css'
+      link.rel = value.indexOf('less') > -1 ? 'stylesheet/less' : 'stylesheet'
+      link.href = value
 
-    configMatch[1].split('\n').forEach(config => {
-      const [, name, value] = config.match(/^(.+?): *(.+)$/) || []
+      document.body.appendChild(link)
+    }
 
-      if (name === 'title') {
-        document.title = value.trim()
-      }
+    if (name === 'script') {
+      const script = document.createElement('script')
+      script.src = value
 
-      if (name === 'style') {
-        const link = document.createElement('link')
-        link.type = 'text/css'
-        link.rel = value.indexOf('less') > -1 ? 'stylesheet/less' : 'stylesheet'
-        link.href = value
-
-        document.body.appendChild(link)
-      }
-
-      if (name === 'script') {
-        const script = document.createElement('script')
-        script.src = value
-
-        document.body.appendChild(script)
-      }
-    })
-  }
+      document.body.appendChild(script)
+    }
+  })
 
   const tokens = marked.lexer(md)
 
