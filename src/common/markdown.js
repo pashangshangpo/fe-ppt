@@ -110,7 +110,8 @@ export default md => {
 
       if (name === 'style') {
         const link = document.createElement('link')
-        link.rel = 'stylesheet'
+        link.type = 'text/css'
+        link.rel = value.indexOf('less') > -1 ? 'stylesheet/less' : 'stylesheet'
         link.href = value
 
         document.body.appendChild(link)
