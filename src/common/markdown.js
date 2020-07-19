@@ -13,6 +13,9 @@ export default md => {
 
   marked.use({
     renderer: {
+      image(url) {
+        return `<Image src="${url}" />`
+      },
       blockquote(text) {
         return addAttr('blockquote', this.token.attrs, text)
       },

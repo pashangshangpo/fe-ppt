@@ -4,6 +4,7 @@ import JsxParser from 'react-jsx-parser'
 import { getPPT } from '$api'
 import markdown from '$common/markdown'
 import WebSlides from '$common/webSlides'
+import Image from '$components/Image'
 
 import 'animate.css/animate.min.css'
 import './style/index.scss'
@@ -21,7 +22,10 @@ const render = md => {
     }
 
     render() {
-      return <JsxParser jsx={`<div id="webslides">${md}</div>`} />
+      return <JsxParser
+        components={{ Image }}
+        jsx={`<div id="webslides">${md}</div>`}
+      />
     }
   }
 
