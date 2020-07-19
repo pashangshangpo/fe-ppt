@@ -23,15 +23,20 @@ Promise.resolve().then(async () => {
   }
 
   if (FilePath) {
-    const md = Fs.readFileSync(FilePath).toString()
     const distPath = Path.join(__dirname, '../dist')
-    const htmlPath = Path.join(distPath, 'index.html')
-    let html = Fs.readFileSync(htmlPath).toString()
 
-    html = html.replace('window.MD', `window.MD = \`${md}\``)
+    const getHtml = (FilePath, distPath) => {
+      const md = Fs.readFileSync(FilePath).toString()
+      const htmlPath = Path.join(distPath, 'index.html')
+      let html = Fs.readFileSync(htmlPath).toString()
+
+      return html.replace('window.MD', `window.MD = \`${md}\``)
+    }
 
     if (Type === 'demo') {
-      Demo(html)
+      Demo(() => {
+        return getHtml(FilePath, distPath)
+      })
       return
     }
 
@@ -39,7 +44,7 @@ Promise.resolve().then(async () => {
 
     CopyDir.sync(distPath, demoOutPath)
 
-    Fs.writeFileSync(Path.join(demoOutPath, 'index.html'), html)
+    Fs.writeFileSync(Path.join(demoOutPath, 'index.html'), getHtml(FilePath, distPath))
 
     Compressing.zip.compressDir(
       demoOutPath,

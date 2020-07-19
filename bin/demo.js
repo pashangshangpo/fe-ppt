@@ -1,12 +1,13 @@
 const Path = require('path')
+const fs = require('fs')
 const static = require('koa-static')
 const Koa = require('koa')
 const app = new Koa()
 
-module.exports = indexPage => {
+module.exports = getHtml => {
   app.use(async (cxt, next) => {
-    if (cxt.url === '/' && indexPage) {
-      cxt.body = indexPage
+    if (cxt.url === '/' && getHtml) {
+      cxt.body = getHtml()
 
       return
     }
