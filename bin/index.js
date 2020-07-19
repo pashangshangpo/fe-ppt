@@ -44,7 +44,10 @@ Promise.resolve().then(async () => {
 
     CopyDir.sync(distPath, demoOutPath)
 
-    Fs.writeFileSync(Path.join(demoOutPath, 'index.html'), getHtml(FilePath, distPath))
+    Fs.writeFileSync(
+      Path.join(demoOutPath, 'index.html'),
+      getHtml(FilePath, distPath)
+    )
 
     Compressing.zip.compressDir(
       demoOutPath,
