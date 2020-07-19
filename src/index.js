@@ -18,7 +18,10 @@ const render = md => {
   md = markdown(config.md, config.rules)
 
   const isConfigRule = name => {
-    return (config.rules.find(item => item.name === name) || { value: 'false' }).value === 'true'
+    return (
+      (config.rules.find(item => item.name === name) || { value: 'false' })
+        .value === 'true'
+    )
   }
 
   class Main extends React.Component {

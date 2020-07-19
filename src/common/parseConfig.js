@@ -14,13 +14,13 @@ export default md => {
 
       rules.push({
         name,
-        value
+        value,
       })
     })
   }
 
   return {
     md,
-    rules
+    rules,
   }
 }
