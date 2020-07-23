@@ -1,6 +1,6 @@
 {
   "name": "fe-ppt",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "bin": {
     "fe-ppt": "./bin/index.js"
   },
