@@ -23,14 +23,14 @@ export default class extends React.Component {
     if (this.state.paused) {
       this.videoRef.play()
       this.setState({
-        paused: false
+        paused: false,
       })
       return
     }
 
     this.videoRef.pause()
     this.setState({
-      paused: true
+      paused: true,
     })
   }
 
@@ -40,8 +40,11 @@ export default class extends React.Component {
     }
 
     return (
-      <span className={'image-video-com ' + (this.state.paused ? 'paused' : '')} onClick={this.handleClick}>
-        <video ref={ref => this.videoRef = ref} src={this.state.url}></video>
+      <span
+        className={'image-video-com ' + (this.state.paused ? 'paused' : '')}
+        onClick={this.handleClick}
+      >
+        <video ref={ref => (this.videoRef = ref)} src={this.state.url}></video>
       </span>
     )
   }

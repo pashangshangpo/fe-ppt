@@ -1,16 +1,18 @@
 .image-video-com {
-  display: inline-block;
   position: relative;
+  display: inline-block;
 
   &.paused {
     &::before {
-      content: '';
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: url(/public/play.png) center center no-repeat, rgba(0, 0, 0, 0.2);
+      background:
+        url(/public/play.png) center center no-repeat,
+        rgba(0, 0, 0, 0.2);
+      content: '';
     }
   }
 
