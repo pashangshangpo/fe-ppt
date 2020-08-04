@@ -14,6 +14,10 @@ export default (md, rules) => {
   marked.use({
     renderer: {
       image(url) {
+        if (url.includes('.type')) {
+          return `<ImageVideo url="${url}" />`
+        }
+        
         return `<Image src="${url}" />`
       },
       blockquote(text) {
