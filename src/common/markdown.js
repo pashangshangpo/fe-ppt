@@ -17,7 +17,7 @@ export default (md, rules) => {
         if (url.includes('.type')) {
           return `<ImageVideo url="${url}" />`
         }
-        
+
         return `<Image src="${url}" />`
       },
       blockquote(text) {

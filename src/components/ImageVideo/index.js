@@ -3,7 +3,7 @@ import { getImageVideoUrl } from '$api'
 
 export default class extends React.Component {
   state = {
-    url: ''
+    url: '',
   }
 
   componentDidMount() {
@@ -11,7 +11,7 @@ export default class extends React.Component {
 
     getImageVideoUrl(this.props.url, imageLength).then(url => {
       this.setState({
-        url
+        url,
       })
     })
   }

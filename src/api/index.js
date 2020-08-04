@@ -7,7 +7,7 @@ export const getPPT = url => {
 export const getImageVideoUrl = (url, imageLength) => {
   return axios
     .get(url, {
-      responseType: 'blob'
+      responseType: 'blob',
     })
     .then(res => res.data)
     .then(res => res.slice(imageLength))
