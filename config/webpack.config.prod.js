@@ -29,7 +29,7 @@ module.exports = merge(common, {
     path: BuildPath,
     filename: '[name].[contenthash].js',
     chunkFilename: "[name].[chunkhash:5].js",
-    publicPath: '/'
+    publicPath: './'
   },
   optimization: {
     runtimeChunk: 'single',
