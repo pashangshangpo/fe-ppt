@@ -51,21 +51,55 @@ module.exports = {
             loader: 'url-loader',
             options: {
               name: 'image/[name].[hash].[ext]',
-              limit: 10000
+              limit: 90000000
             }
           }
         ]
       },
-      // {
-      //   test: /\.svg/,
-      //   include: [
-      //     resolve('src')
-      //   ],
-      //   exclude: /(node_modules|bower_components)/,
-      //   use: ['svg-sprite-loader']
-      // }
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')('last 100 versions')
+              ]
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')('last 100 versions')
+              ]
+            }
+          },
+          'sass-loader'
+        ]
+      }
     ]
   },
-  plugins: [
-  ]
 }

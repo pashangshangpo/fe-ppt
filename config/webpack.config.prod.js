@@ -10,7 +10,6 @@ const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const common = require('./webpack.config.common')
 
@@ -28,69 +27,7 @@ module.exports = merge(common, {
   output: {
     path: BuildPath,
     filename: '[name].[contenthash].js',
-    chunkFilename: "[name].[chunkhash:5].js",
     publicPath: './'
-  },
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    },
-    minimize: true,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('autoprefixer')('last 100 versions')
-              ]
-            }
-          },
-          'sass-loader'
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('autoprefixer')('last 100 versions')
-              ]
-            }
-          },
-          'sass-loader'
-        ]
-      }
-    ]
   },
   plugins: [
     new CleanWebpackPlugin(
@@ -104,10 +41,6 @@ module.exports = merge(common, {
       'process.env': {
         'NODE_ENV': "'production'"
       }
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'style/[contenthash].css',
-      chunkFilename: 'style/[contenthash].css'
     }),
     publicPath && new CopyWebpackPlugin([
       {
