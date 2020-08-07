@@ -8,7 +8,6 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const common = require('./webpack.config.common')
@@ -18,8 +17,7 @@ const resolve = (...arg) => {
 }
 
 const BuildPath = resolve('dist')
-const { publicPath, template } = require(resolve('peak.config'))
-const PublicPath = path.join(BuildPath, publicPath)
+const { template } = require(resolve('peak.config'))
 const TemplatePath = resolve(template)
 
 module.exports = merge(common, {
@@ -42,13 +40,6 @@ module.exports = merge(common, {
         'NODE_ENV': "'production'"
       }
     }),
-    publicPath && new CopyWebpackPlugin([
-      {
-        from: resolve(publicPath.replace('/', '')),
-        to: PublicPath,
-        ignore: ['.*']
-      }
-    ]),
     new HtmlWebpackPlugin({
       template: TemplatePath,
       filename: path.join(BuildPath, template)
