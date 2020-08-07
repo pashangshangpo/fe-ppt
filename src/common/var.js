@@ -18,13 +18,13 @@ const getMdVar = md => {
 
   if (!match) {
     return {
-      md
+      md,
     }
   }
 
   return {
     md: md.replace(match[0], ''),
-    funCode: match[1]
+    funCode: match[1],
   }
 }
 

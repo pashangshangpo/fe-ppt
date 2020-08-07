@@ -27,7 +27,7 @@ const render = md => {
           .value === 'true'
       )
     }
-  
+
     class Main extends React.Component {
       componentDidMount() {
         new WebSlides({
@@ -37,10 +37,10 @@ const render = md => {
           showIndex: false,
           navigateOnScroll: isConfigRule('navigateOnScroll'),
         })
-  
+
         require('less')
       }
-  
+
       render() {
         return (
           <JsxParser
@@ -50,10 +50,10 @@ const render = md => {
         )
       }
     }
-  
+
     const dom = document.createElement('div')
     dom.id = 'app'
-  
+
     ReactDOM.render(<Main />, document.body.appendChild(dom))
   })
 }
