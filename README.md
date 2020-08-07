@@ -141,7 +141,7 @@ output
 
 ### 动画
 
-参考文档：[animate.css](https://animate.style/)
+动画API文档：[animate.css](https://animate.style/)
 
 ```
 ::: .backOutDown
@@ -150,6 +150,8 @@ output
 
 :::
 ```
+
+添加指定的类名即可实现动画效果。
 
 ### 添加多个指令
 
@@ -176,11 +178,11 @@ title: 不会写PPT的前端工程师
 ```
 ---
 style: http://127.0.0.1:8080/reset.css
-style: http://127.0.0.1:8080/layout.css
+style: http://127.0.0.1:8080/layout.less
 ---
 ```
 
-可以定制化或样式共用，比如写一套布局样式，之后就可以导入这个布局样式
+可以定制化或样式共用，比如写一套布局样式，之后就可以导入这个布局样式，另外支持less文件。
 
 ### 添加远程脚本
 
@@ -193,3 +195,102 @@ script: http://127.0.0.1:8080/layout.js
 ---
 
 ```
+
+### 模块化PPT
+
+万物皆模块，模块化PPT，一次模块，终身受用。
+
+#### 内部模块
+
+内部模块定义使用 `--- var ---` 并以 `---` 作为结尾。
+
+在 `--- var ---` 中使用`Javascript`语法定义函数或变量，使用`@变量名()`进行引用。
+
+```
+--- var ---
+
+var page = ({ title, content }) => `
+::: page .page
+
+# ${title}
+
+${content}
+
+:::
+`
+
+var pageEnd = (title = '分享结束') => `
+::: style
+
+.page-end h1 {
+  margin-top: 300px;
+  font-size: 60px;
+  text-align: center;
+}
+
+:::
+
+::: page .page-end
+
+# ${title}
+
+:::
+`
+
+---
+
+@page({
+  title: 'Hello World',
+  content: '世界你好！'
+})
+
+@pageEnd('本次分享结束')
+
+```
+
+以上模块最终输出的内容为
+
+```
+::: page .page
+
+# Hello World
+
+世界你好！
+
+:::
+
+::: style
+
+.page-end h1 {
+  margin-top: 300px;
+  font-size: 60px;
+  text-align: center;
+}
+
+:::
+
+::: page .page-end
+
+# 本次分享结束
+
+:::
+
+```
+
+需要注意的是，引用时必须作为独立的行。
+
+正确的。
+
+```
+@bgImage()
+```
+
+错误的，引用必须作为独立的行。
+
+```
+
+![](@bgImage())
+
+```
+
+如遇到上面问题，可以将内容作为一个整体并返回。

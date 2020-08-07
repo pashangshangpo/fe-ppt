@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import JsxParser from 'react-jsx-parser'
 import { getPPT } from '$api'
+import fun from '$common/var'
 import markdown from '$common/markdown'
 import WebSlides from '$common/webSlides'
 import parseConfig from '$common/parseConfig'
@@ -14,6 +15,7 @@ import './style/index.scss'
 const url = location.href.split('?ppt=')[1]
 const md = window.MD
 const render = md => {
+  md = fun(md)
   const config = parseConfig(md)
 
   md = markdown(config.md, config.rules)
