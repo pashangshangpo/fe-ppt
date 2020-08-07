@@ -141,7 +141,7 @@ output
 
 ### 动画
 
-动画API文档：[animate.css](https://animate.style/)
+动画 API 文档：[animate.css](https://animate.style/)
 
 ```
 ::: .backOutDown
@@ -182,7 +182,7 @@ style: http://127.0.0.1:8080/layout.less
 ---
 ```
 
-可以定制化或样式共用，比如写一套布局样式，之后就可以导入这个布局样式，另外支持less文件。
+可以定制化或样式共用，比如写一套布局样式，之后就可以导入这个布局样式，另外支持 less 文件。
 
 ### 添加远程脚本
 
@@ -196,9 +196,9 @@ script: http://127.0.0.1:8080/layout.js
 
 ```
 
-### 模块化PPT
+### 模块化 PPT
 
-万物皆模块，模块化PPT，一次模块，终身受用。
+万物皆模块，模块化 PPT，一次模块，终身受用。
 
 #### 内部模块
 

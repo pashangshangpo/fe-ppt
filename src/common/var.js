@@ -1,6 +1,6 @@
 /**
  * 模块化PPT
- * 
+ *
  * --- var ---
  */
 
@@ -21,22 +21,18 @@ export default md => {
 
   md = md.replace(match[0], '')
 
-  forReg(
-    /@((.*?)\(([\w\W]*?\n|[\w\W]*?)\))/g,
-    md,
-    funMath => {
-      const [matchStr, fun] = funMath
-      let buildRes = eval(`${match[1]};${fun}`)
+  forReg(/@((.*?)\(([\w\W]*?\n|[\w\W]*?)\))/g, md, funMath => {
+    const [matchStr, fun] = funMath
+    let buildRes = eval(`${match[1]};${fun}`)
 
-      if (Array.isArray(buildRes)) {
-        buildRes = buildRes.join('\n')
-      }
-
-      buildRes = buildRes.trim()
-
-      md = md.replace(matchStr, buildRes)
+    if (Array.isArray(buildRes)) {
+      buildRes = buildRes.join('\n')
     }
-  )
+
+    buildRes = buildRes.trim()
+
+    md = md.replace(matchStr, buildRes)
+  })
 
   return md.trim()
 }
