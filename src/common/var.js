@@ -3,6 +3,7 @@
  *
  * --- var ---
  */
+import { getFileCode } from '$api'
 
 const forReg = (reg, str, cb) => {
   let match = null
@@ -12,27 +13,60 @@ const forReg = (reg, str, cb) => {
   }
 }
 
-export default md => {
+const getMdVar = md => {
   const match = md.match(/--- *var *---\n+([\w\W]+?)\n+?---/)
 
   if (!match) {
-    return md
+    return {
+      md
+    }
   }
 
-  md = md.replace(match[0], '')
+  return {
+    md: md.replace(match[0], ''),
+    funCode: match[1]
+  }
+}
 
-  forReg(/@((.*?)\(([\w\W]*?\n|[\w\W]*?)\))/g, md, funMath => {
-    const [matchStr, fun] = funMath
-    let buildRes = eval(`${match[1]};${fun}`)
+const getFunCodes = funs => {
+  const promiseAll = []
 
-    if (Array.isArray(buildRes)) {
-      buildRes = buildRes.join('\n')
-    }
+  for (let fun of funs) {
+    const url = fun.value
 
-    buildRes = buildRes.trim()
+    promiseAll.push(getFileCode(url))
+  }
 
-    md = md.replace(matchStr, buildRes)
-  })
+  return Promise.all(promiseAll)
+}
 
-  return md.trim()
+export default (md, funs) => {
+  const mdVar = getMdVar(md)
+
+  return getFunCodes(funs)
+    .then(funCodes => {
+      if (mdVar.funCode) {
+        funCodes.push(mdVar.funCode)
+      }
+
+      return funCodes.join(';')
+    })
+    .then(funCode => {
+      md = mdVar.md
+
+      forReg(/@((.*?)\(([\w\W]*?\n|[\w\W]*?)\))/g, md, funMath => {
+        const [matchStr, fun] = funMath
+        let buildRes = eval(`${funCode};${fun}`)
+
+        if (Array.isArray(buildRes)) {
+          buildRes = buildRes.join('\n')
+        }
+
+        buildRes = buildRes.trim()
+
+        md = md.replace(matchStr, buildRes)
+      })
+
+      return md.trim()
+    })
 }

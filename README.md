@@ -294,3 +294,22 @@ var pageEnd = (title = '分享结束') => `
 ```
 
 如遇到上面问题，可以将内容作为一个整体并返回。
+
+#### 外部模块
+
+可以将通用的模块移动到外部文件，然后使用`var`进行引用，这样我们就可以开心的和其他小伙伴分享共享模块，如此写下一行PPT不爽吗？
+
+```
+---
+var: https://gist.githubusercontent.com/pashangshangpo/0234750c3936a1d566f7e5bd0e58e163/raw/0c04a4d6f8dce94c569c63d8a716be571766c2dd/fe-ppt-var.js
+---
+
+@page({
+  title: 'Hello World',
+  content: '世界你好！'
+})
+
+@pageEnd('本次分享结束')
+```
+
+多个模块，可以引用多个`var`。

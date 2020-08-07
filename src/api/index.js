@@ -13,3 +13,7 @@ export const getImageVideoUrl = (url, imageLength) => {
     .then(res => res.slice(imageLength))
     .then(video => URL.createObjectURL(video))
 }
+
+export const getFileCode = url => {
+  return axios.get(url).then(res => res.data)
+}

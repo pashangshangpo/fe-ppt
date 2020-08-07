@@ -15,45 +15,47 @@ import './style/index.scss'
 const url = location.href.split('?ppt=')[1]
 const md = window.MD
 const render = md => {
-  md = fun(md)
   const config = parseConfig(md)
+  const funs = config.rules.filter(item => item.name === 'var') || []
 
-  md = markdown(config.md, config.rules)
+  fun(config.md, funs).then(md => {
+    md = markdown(md, config.rules)
 
-  const isConfigRule = name => {
-    return (
-      (config.rules.find(item => item.name === name) || { value: 'false' })
-        .value === 'true'
-    )
-  }
-
-  class Main extends React.Component {
-    componentDidMount() {
-      new WebSlides({
-        loop: isConfigRule('loop'),
-        changeOnClick: false,
-        autoslide: false,
-        showIndex: false,
-        navigateOnScroll: isConfigRule('navigateOnScroll'),
-      })
-
-      require('less')
-    }
-
-    render() {
+    const isConfigRule = name => {
       return (
-        <JsxParser
-          components={{ Image, ImageVideo }}
-          jsx={`<div id="webslides">${md}</div>`}
-        />
+        (config.rules.find(item => item.name === name) || { value: 'false' })
+          .value === 'true'
       )
     }
-  }
-
-  const dom = document.createElement('div')
-  dom.id = 'app'
-
-  ReactDOM.render(<Main />, document.body.appendChild(dom))
+  
+    class Main extends React.Component {
+      componentDidMount() {
+        new WebSlides({
+          loop: isConfigRule('loop'),
+          changeOnClick: false,
+          autoslide: false,
+          showIndex: false,
+          navigateOnScroll: isConfigRule('navigateOnScroll'),
+        })
+  
+        require('less')
+      }
+  
+      render() {
+        return (
+          <JsxParser
+            components={{ Image, ImageVideo }}
+            jsx={`<div id="webslides">${md}</div>`}
+          />
+        )
+      }
+    }
+  
+    const dom = document.createElement('div')
+    dom.id = 'app'
+  
+    ReactDOM.render(<Main />, document.body.appendChild(dom))
+  })
 }
 
 if (md) {
