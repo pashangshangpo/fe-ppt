@@ -11,19 +11,25 @@
 
 ### 演示 PPT
 
-1. 本地 md 文件
+- 本地 md 文件
 
 ```
 fe-ppt --path hello.md
 ```
 
-2. 远程 md 文件
+- 远程 md 文件
 
 ```
 fe-ppt
 ```
 
 启动服务后，在网址后面的 url 上面添加?ppt=http://127.0.0.1/hello.md
+
+- 在线版，可分享给其他人
+
+```
+fe-ppt --path hello.md --type share
+```
 
 ### 导出 PPT
 
