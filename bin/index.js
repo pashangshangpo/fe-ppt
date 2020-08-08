@@ -2,8 +2,6 @@
 
 Promise.resolve().then(async () => {
   const Cli = require('commander')
-  const Compressing = require('compressing')
-  const CopyDir = require('copy-dir')
   const Fs = require('fs')
   const Path = require('path')
   const Demo = require('./demo')
@@ -24,13 +22,16 @@ Promise.resolve().then(async () => {
 
   if (FilePath) {
     const distPath = Path.join(__dirname, '../dist')
+    const fileName = Path.basename(FilePath).replace('.md', '')
 
     const getHtml = (FilePath, distPath) => {
       const md = Fs.readFileSync(FilePath).toString()
       const htmlPath = Path.join(distPath, 'index.html')
       let html = Fs.readFileSync(htmlPath).toString()
 
-      return html.replace('window.MD', `window.MD = \`${md}\``)
+      html = html.replace(/<title>[\w\W]*?<\/title>/, `<title>${fileName}</title>`)
+
+      return html.replace('window.MD;', `window.MD = \`${md}\``)
     }
 
     if (Type === 'demo') {
@@ -40,18 +41,9 @@ Promise.resolve().then(async () => {
       return
     }
 
-    const demoOutPath = Path.join(distPath, '../fe-ppt-demo')
-
-    CopyDir.sync(distPath, demoOutPath)
-
     Fs.writeFileSync(
-      Path.join(demoOutPath, 'index.html'),
+      Path.join(Path.join(distPath, '../'), `${fileName}.html`),
       getHtml(FilePath, distPath)
-    )
-
-    Compressing.zip.compressDir(
-      demoOutPath,
-      Path.resolve('.', 'fe-ppt-demo.zip')
     )
 
     return
