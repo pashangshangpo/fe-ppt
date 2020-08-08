@@ -57,8 +57,12 @@ Promise.resolve().then(async () => {
       console.log('正在处理中...\n')
 
       const url = await Share(getHtml(FilePath, distPath))
-      
-      console.log(`分享地址：https://ppt-io.github.io/fe-ppt-share/#slide=1/?token=${Buffer.from(url).toString('base64')}`)
+
+      console.log(
+        `分享地址：https://ppt-io.github.io/fe-ppt-share/#slide=1/?token=${Buffer.from(
+          url
+        ).toString('base64')}`
+      )
 
       return
     }
