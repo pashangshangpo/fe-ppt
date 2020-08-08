@@ -29,7 +29,10 @@ Promise.resolve().then(async () => {
       const htmlPath = Path.join(distPath, 'index.html')
       let html = Fs.readFileSync(htmlPath).toString()
 
-      html = html.replace(/<title>[\w\W]*?<\/title>/, `<title>${fileName}</title>`)
+      html = html.replace(
+        /<title>[\w\W]*?<\/title>/,
+        `<title>${fileName}</title>`
+      )
 
       return html.replace('window.MD;', `window.MD = \`${md}\``)
     }
