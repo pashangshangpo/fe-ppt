@@ -59,7 +59,7 @@ Promise.resolve().then(async () => {
       const url = await Share(getHtml(FilePath, distPath))
 
       console.log(
-        `分享地址：https://ppt-io.github.io/fe-ppt-share/#slide=1/?token=${Buffer.from(
+        `分享地址：https://htmloss.github.io/p/#slide=1/?token=${Buffer.from(
           url
         ).toString('base64')}`
       )
