@@ -7,6 +7,7 @@ import markdown from '$common/markdown'
 import WebSlides from '$common/webSlides'
 import parseConfig from '$common/parseConfig'
 import Image from '$components/Image'
+import Video from '$components/Video'
 import ImageVideo from '$components/ImageVideo'
 
 import 'animate.css/animate.min.css'
@@ -44,7 +45,7 @@ const render = md => {
       render() {
         return (
           <JsxParser
-            components={{ Image, ImageVideo }}
+            components={{ Image, Video, ImageVideo }}
             jsx={`<div id="webslides">${md}</div>`}
           />
         )
